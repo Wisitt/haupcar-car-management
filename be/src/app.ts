@@ -4,9 +4,9 @@ import carRoutes from './routes/car.routes';
 
 const app = express();
 app.use(cors({
-    origin: ['http://localhost:5173', ''],
+    origin: ['http://localhost:5173', 'https://haupcar-car-management.vercel.app'],
     credentials: true
-  }));
+}));
 app.use(express.json());
 app.use("/api/cars", carRoutes);
 
