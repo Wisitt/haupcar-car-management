@@ -2,7 +2,8 @@ import axios from 'axios';
 import { Car } from '../types/car';
 import { CarInput } from '../validation/carSchema';
 
-const API_URL = 'http://localhost:3001/api/cars';
+const BASE_URL = import.meta.env.VITE_API || 'http://localhost:3001';
+const API_URL = `${BASE_URL}/api/cars`;
 
 
 export const carService = {

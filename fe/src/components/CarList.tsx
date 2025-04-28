@@ -77,7 +77,7 @@ const CarList: React.FC<CarListProps> = ({
   ];
 
   return (
-    <Card className="car-list-card" bordered={false}>
+    <Card className="car-list-card" variant="outlined">
       <Title level={4} className="card-title">Car Inventory</Title>
       <Table
         dataSource={cars}

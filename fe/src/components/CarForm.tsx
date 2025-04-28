@@ -66,7 +66,7 @@ const CarForm: React.FC<CarFormProps> = ({ addCar, updateCar, initialData }) => 
     <Card 
       title={initialData ? "แก้ไขรายละเอียดรถ" : "เพิ่มรถใหม่"} 
       className="car-form-card"
-      bordered={false}
+      variant="outlined"
     >
       <Form 
         layout="vertical" 
