@@ -1,88 +1,113 @@
 import { useEffect, useState } from "react";
+import { Layout, Modal, Row, Col, Typography, message } from "antd";
 import CarForm from "./components/CarForm";
 import CarList from "./components/CarList";
 import { Car } from "./types/car";
-import { Modal, Splitter } from "antd";
 import { carService } from "./services/carService";
-import './App.css'
+import './App.css';
 
+const { Header, Content } = Layout;
+const { Title } = Typography;
 
 function App() {
   const [cars, setCars] = useState<Car[]>([]);
   const [carToEdit, setCarToEdit] = useState<Car | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const fetchCars = async () => {
+    setLoading(true);
     try {
       const data = await carService.getAllCars();
       setCars(data);
-    } catch (error) {
-      console.error("Error fetching cars:", error);
+    } catch {
+      messageApi.error("ไม่สามารถดึงข้อมูลได้");
+    } finally {
+      setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchCars();
   }, []);
-  const addCar = async () => {
+
+  const handleAddCar = async (car: Car) => {
+    setCars(prev => [...prev, car]);
+    messageApi.success("เพิ่มเรียบร้อย");
     await fetchCars();
   };
-  const updateCar = async() => {
-    await fetchCars();
+
+  const handleUpdateCar = async (car: Car) => {
+    setCars(prev => prev.map(c => c.id === car.id ? car : c));
+    messageApi.success("อัปเดตเรียบร้อย");
     closeModal();
-  }
+    await fetchCars();
+  };
 
   const openModal = (car: Car) => {
     setCarToEdit(car);
     setIsModalOpen(true);
-  }
+  };
 
   const closeModal = () => {
     setCarToEdit(null);
     setIsModalOpen(false);
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+
   const handleDeleteCar = async (id: number) => {
     try {
-      setCars((prevCars) => prevCars.filter((car) => car.id !== id));
       await carService.deleteCar(id);
+      setCars(prev => prev.filter(car => car.id !== id));
+      messageApi.success("ลบเรียบร้อย");
     } catch (error) {
-      console.error('Error deleting car:', error);
+      messageApi.error("ลบไม่สำเร็จ");
+      console.error("Error deleting car:", error);
     }
   };
 
- 
-  
   return (
-    <div className="container">
-      <h1 className="text-center mb-45">Car Management</h1>
-      <Splitter style={{ height: "100%", boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-        <Splitter.Panel defaultSize="50%" min="20%" max="70%">
-          <CarForm addCar={addCar} updateCar={updateCar}/>
-        </Splitter.Panel>
-        <Splitter.Panel>
-          <CarList cars={cars} editCar={openModal} deleteCar={handleDeleteCar} loading={false}/>
-        </Splitter.Panel>
-      </Splitter>
-      <hr style={{ margin: "2rem 0" }} />
+    <Layout className="layout">
+      {contextHolder}
+      <Header className="header">
+        <div className="logo" />
+        <Title level={2} className="header-title">Car Management System</Title>
+      </Header>
+      <Content className="content">
+        <Row gutter={[24, 24]} className="main-container">
+          <Col xs={24} lg={8}>
+            <CarForm 
+              addCar={handleAddCar} 
+              updateCar={handleUpdateCar} 
+            />
+          </Col>
+          <Col xs={24} lg={16}>
+            <CarList 
+              cars={cars} 
+              editCar={openModal} 
+              deleteCar={handleDeleteCar}
+              loading={loading}
+            />
+          </Col>
+        </Row>
+      </Content>
       <Modal
-        title="Edit Car"
         open={isModalOpen}
-        onClose={closeModal}
+        onCancel={closeModal}
         footer={null}
         destroyOnClose
-        onCancel={handleCancel}
+        centered
+        style={{padding: 0}}
       >
         {carToEdit && (
-            <CarForm
-              initialData={carToEdit}
-              addCar={addCar}
-              updateCar={updateCar}
-            />
+          <CarForm
+            initialData={carToEdit}
+            addCar={handleAddCar} 
+            updateCar={handleUpdateCar}
+          />
         )}
       </Modal>
-    </div>
+    </Layout>
   );
 }
 

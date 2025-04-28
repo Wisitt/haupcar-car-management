@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Car } from '../types/car';
 import { CarInput } from '../validation/carSchema';
 
-const API_URL = 'http://localhost:3001/cars';
+const API_URL = 'http://localhost:3001/api/cars';
 
 
 export const carService = {

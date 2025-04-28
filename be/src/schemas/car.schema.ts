@@ -1,15 +1,10 @@
-import z from 'zod';
+import { z } from 'zod';
+
 export const CarSchema = z.object({
-    registration: z
-    .string({ required_error: "โปรดระบุทะเบียนรถ" })
-    .min(1, { message: "ทะเบียนรถต้องไม่ว่าง" }),
-    brand: z.
-    string({ required_error: "โปรดระบุยี่ห้อรถ" })
-    .min(1, { message: "ยี่ห้อรถต้องไม่ว่าง" }),
-    model: z.
-    string({ required_error: "โปรดระบุรุ่นรถ" })
-    .min(1, { message: "รุ่นรถต้องไม่ว่าง" }),
-    notes: z
-    .string()
-    .optional(),
+    registration: z.string().nonempty("โปรดระบุทะเบียนรถ"),
+    brand: z.string().nonempty("โปรดระบุยี่ห้อรถ"),
+    model: z.string().nonempty("โปรดระบุรุ่นรถ"),
+    notes: z.string().max(500).optional(),
 });
+
+export type CarInput = z.infer<typeof CarSchema>;

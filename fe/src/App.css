@@ -8,9 +8,132 @@ html, body, #root {
   width: 100%;
   height: 100vh;
 }
+.ant-modal-content {
+  padding: 0 !important;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #ffffff;
+}
 
-#root {
-  height: 100vh;
-  padding: 2rem;
+.layout {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.header {
+  background: #1890ff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-title {
+  color: white !important;
+  margin: 0 !important;
+}
+
+.content {
+  padding: 24px;
+  flex: 1;
+  width: 100%;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.footer {
   text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.car-form-card, .car-list-card {
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+              0 3px 6px 0 rgba(0, 0, 0, 0.12),
+              0 5px 12px 4px rgba(0, 0, 0, 0.09);
+}
+
+.car-form-card .ant-card-head {
+  background-color: #f0f7ff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-title {
+  margin-bottom: 16px !important;
+}
+
+.car-form {
+  padding: 8px;
+}
+
+.form-input {
+  border-radius: 6px;
+}
+
+.submit-button {
+  height: 40px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.car-table {
+  margin-top: 16px;
+}
+
+
+@media (max-width: 768px) {
+  .content {
+    padding: 16px;
+  }
+  
+  .car-form-card, .car-list-card {
+    margin-bottom: 16px;
+  }
+  
+  .header-title {
+    font-size: 18px !important;
+  }
+  
+  .car-table .ant-table {
+    font-size: 12px;
+  }
+  
+  .car-table .ant-btn {
+    padding: 0 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .content {
+    padding: 12px;
+  }
+  
+  .car-form {
+    padding: 4px;
+  }
+  
+  .car-form-card .ant-card-head-title, 
+  .car-list-card .ant-card-head-title {
+    font-size: 16px;
+  }
+  
+  .header {
+    padding: 0 16px;
+  }
 }

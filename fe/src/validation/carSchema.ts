@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 export const CarSchema = z.object({
-    registration: z.string().min(1, "Registration is required"),
-    brand: z.string().min(1, "Brand is required"),
-    model: z.string().min(1, "Model is required"),
+    registration: z.string().min(1, "โปรดระบุทะเบียนรถ"),
+    brand: z.string().min(1, "โปรดระบุยี่ห้อรถ"),
+    model: z.string().min(1, "โปรดระบุรุ่นรถ"),
     notes: z.string().optional(),
 });
 

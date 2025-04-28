@@ -11,13 +11,13 @@ export const carService = {
           orderBy: { id: 'asc' },
         });
     },
-
+    
     getCarById: async (id: number) => {
         return await prisma.car.findUniqueOrThrow({
         where: { id },
         });
     },
-
+    
     createCar: async (data: Omit<Car, 'id'>) => {
         return prisma.car.create({ data });
     },
