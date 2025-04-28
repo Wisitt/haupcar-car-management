@@ -85,7 +85,7 @@ const CarForm: React.FC<CarFormProps> = ({ addCar, updateCar, initialData }) => 
             >
               <Input 
                 {...field} 
-                placeholder="Enter registration number" 
+                placeholder="กรอกหมายเลขทะเบียน" 
                 className="form-input"
               />
             </Form.Item>
@@ -104,7 +104,7 @@ const CarForm: React.FC<CarFormProps> = ({ addCar, updateCar, initialData }) => 
             >
               <Input 
                 {...field} 
-                placeholder="Enter car brand" 
+                placeholder="ใส่ยี่ห้อรถ" 
                 className="form-input"
               />
             </Form.Item>
@@ -123,7 +123,7 @@ const CarForm: React.FC<CarFormProps> = ({ addCar, updateCar, initialData }) => 
             >
               <Input 
                 {...field} 
-                placeholder="Enter car model" 
+                placeholder="ใส่รุ่นรถ" 
                 className="form-input"
               />
             </Form.Item>
@@ -142,7 +142,7 @@ const CarForm: React.FC<CarFormProps> = ({ addCar, updateCar, initialData }) => 
               <TextArea 
                 {...field} 
                 rows={4} 
-                placeholder="Enter any additional notes" 
+                placeholder="บันทึกเพิ่มเติม" 
                 className="form-input"
               />
             </Form.Item>
